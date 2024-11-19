@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Summary</title>
+  <style>
+    /* General Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #0f2b35;
+      color: #e0e0e0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 400px;
+      padding: 20px;
+      border-radius: 12px;
+      background-color: #122f3b;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    .container h1 {
+      font-size: 2em;
+      color: #5ce0a1;
+      margin-bottom: 20px;
+      animation: textFadeIn 1.5s ease-in-out;
+    }
+
+    .order {
+      border: 1px solid #3a5060;
+      padding: 15px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      background-color: #183947;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+
+    .items-list {
+      list-style-type: none;
+      padding: 0;
+    }
+
+    .items-list li {
+      margin: 5px 0;
+    }
+
+    .total, .date {
+      font-weight: bold;
+      color: #5ce0a1;
+    }
+
+    .no-orders {
+      color: #e57373;
+      font-size: 1.2em;
+      margin-top: 20px;
+    }
+
+    /* Button styles */
+    .buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 20px;
+    }
+
+    .button {
+      padding: 10px 20px;
+      font-size: 1em;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    .button.back {
+      background-color: #5ce0a1;
+      color: #122f3b;
+    }
+
+    .button.payment {
+      background-color: #4dc08d;
+      color: #ffffff;
+    }
+
+    .button.back:hover {
+      background-color: #4dc08d;
+    }
+
+    .button.payment:hover {
+      background-color: #3ea277;
+    }
+
+    /* Animations */
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+
+    @keyframes textFadeIn {
+      from {
+        opacity: 0;
+      }
+      to {
+        opacity: 1;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Order Summary</h1>
+
+    <!-- Container to display the order summary -->
+    <div id="orderContainer" class="order-container">
+      <!-- Order summaries will be dynamically loaded here -->
+    </div>
+
+    <!-- Buttons for navigation -->
+    <div class="buttons">
+      <button class="button back" onclick="goBack()">Back</button>
+      <button class="button payment" onclick="proceedToPayment()">Proceed to Payment</button>
+    </div>
+  </div>
+
+  <!-- Firebase SDKs -->
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getFirestore, collection, query, where, orderBy, limit, getDocs } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+    import { getAuth, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-auth.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyALf0kWiEBWKBUHOCWOLwwbshc8678CQ_M",
+      authDomain: "sass-66c7f.firebaseapp.com",
+      projectId: "sass-66c7f",
+      storageBucket: "sass-66c7f.appspot.com",
+      messagingSenderId: "485007199733",
+      appId: "1:485007199733:web:dbf3c7c8a05f6ab03324bc",
+      measurementId: "G-HS4N83RJ1P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+    const auth = getAuth(app);
+    const orderContainer = document.getElementById('orderContainer');
+
+    onAuthStateChanged(auth, async (user) => {
+      if (user) {
+        const userQuery = query(collection(db, 'users'), where('username', '==', user.email));
+        const querySnapshot = await getDocs(userQuery);
+
+        if (!querySnapshot.empty) {
+          const userDoc = querySnapshot.docs[0];
+          const username = userDoc.data().name;
+          displayOrderSummary(username);
+        } else {
+          console.log("User document not found.");
+          orderContainer.textContent = 'No orders found for this user.';
+        }
+      } else {
+        orderContainer.textContent = 'User not logged in.';
+      }
+    });
+
+    const displayOrderSummary = async (username) => {
+      console.log("Querying latest order for username:", username);
+
+      const orderQuery = query(
+        collection(db, 'receipts'),
+        where('username', '==', username),
+        orderBy('date', 'desc'),
+        limit(1)
+      );
+
+      const querySnapshot = await getDocs(orderQuery);
+
+      if (!querySnapshot.empty) {
+        const latestOrderDoc = querySnapshot.docs[0];
+        const orderData = latestOrderDoc.data();
+        console.log("Found latest order data:", orderData);
+
+        const orderDiv = document.createElement('div');
+        orderDiv.classList.add('order');
+
+        const itemsList = document.createElement('ul');
+        itemsList.classList.add('items-list');
+
+        orderData.items.forEach(item => {
+          const itemElement = document.createElement('li');
+          itemElement.textContent = `${item.name} - Quantity: ${item.quantity} - ₹${(item.price * item.quantity).toFixed(2)}`;
+          itemsList.appendChild(itemElement);
+        });
+
+        const totalDiv = document.createElement('div');
+        totalDiv.classList.add('total');
+        totalDiv.textContent = `Total: ₹${orderData.total.toFixed(2)}`;
+        orderDiv.appendChild(itemsList);
+        orderDiv.appendChild(totalDiv);
+
+        const dateDiv = document.createElement('div');
+        dateDiv.classList.add('date');
+        dateDiv.textContent = `Order Date: ${new Date(orderData.date).toLocaleString()}`;
+        orderDiv.appendChild(dateDiv);
+
+        orderContainer.appendChild(orderDiv);
+      } else {
+        console.log("No orders found in Firestore.");
+        orderContainer.innerHTML = '<div class="no-orders">No orders found for this user.</div>';
+      }
+    };
+  </script>
+
+  <!-- Non-Module Script for Global Functions -->
+  <script>
+    function goBack() {
+      window.history.back();
+    }
+
+    function proceedToPayment() {
+      window.location.href = './payment.html'; // Update this path to your actual payment page URL
+    }
+  </script>
+</body>
+</html>

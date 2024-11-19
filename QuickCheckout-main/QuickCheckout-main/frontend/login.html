@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Page</title>
+    <link rel="stylesheet" href="login.css" />
+    <script type="module" src="login.js" defer></script>
+  </head>
+  <body>
+    <div class="container">
+      <form>
+        <div class="login-form">
+          <h2 class="heading">Login</h2>
+          <div class="inputbox">
+            <p>Username</p>
+            <input type="text" id="emailbox" placeholder="Enter Username" />
+          </div>
+          <div class="inputbox">
+            <p>Password</p>
+            <input type="password" id="passbox" placeholder="Enter your Password" />
+          </div>
+          <a href="#"><p class="forgot">Forgot Password?</p></a>
+          <div class="loginbtn">
+              <button type="submit" id="login">Log In</button>
+          </div>
+          <a href="./register.html" ><p class="register-link">Don&#39;t have an account yet?&nbsp; </p><p class="sign">Sign Up</p></a>
+        </div>
+      </form>
+    </div>
+    <div id="custom-alert" class="custom-alert">
+      <div class="custom-alert-content">
+        <p id="custom-alert-message"></p>
+        <button id="custom-alert-close-btn">Close</button>
+      </div>
+    </div>
+  </body>
+</html>

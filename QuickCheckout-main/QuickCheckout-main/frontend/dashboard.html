@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Bill Ease</title>
+  <link rel="stylesheet" href="dashboard.css">
+</head>
+<body>
+  <div class="container">
+    <div class="heading">
+      <img src="./images/image.png" alt="logo-image" class="heroImg" />
+      <span style="display: flex;align-items: center;">
+        <img src="./images/night-mode.png" height="25px" title="change theme" style="background-color: white;border-radius: 50%;display: none;" id="btn009" alt="">
+        <button id="btn01">Add item to database</button>
+      </span>
+    </div>
+    <div style="display: flex;justify-content: center;"><video id="video" playsinline></video></div>
+    <div class="totalParent">
+      <div class="totalText">Total: </div>
+      <div class="totalValue" id="totalDiv1"></div>
+    </div>
+    <div class="inputsection">
+      <input type="text" id="barcodeResult" placeholder="Detected barcode will appear here" >
+      <button id="addbtn">Add</button>
+      
+    </div>
+    
+    <div class="list">
+      <hr>
+      <div class="headers">
+        <div class="srdiv">Sr No.</div>
+        <div class="namediv">Item Name</div>
+        <div class="pricediv">Price</div>
+      </div>
+      <hr>
+    </div>
+    <div class="submissionAvailable" style="display: none;">
+      <hr/>
+      <div class="item" style="flex-direction: row-reverse;">
+        <div style="width: 20%;border-bottom: 1px solid black;padding-bottom: 4px;">
+          <div class="totalValue" id="totalDiv2"></div>
+        </div>
+      </div>
+      <div style="display: flex;justify-content: center;margin: 10px;">
+        <button id="submitbtn">Submit</button>
+      </div>
+    </div>
+  </div>
+  
+
+  <script src="https://cdn.jsdelivr.net/npm/quagga/dist/quagga.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+  <script type="module" src="dashboard.js"></script>
+  
+</body>
+</html>

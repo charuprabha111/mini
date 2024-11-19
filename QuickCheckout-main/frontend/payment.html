@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Proceed to Payment</title>
+  <style>
+    /* General Reset */
+    *,
+    *::before,
+    *::after {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Body Styles */
+    body {
+      background-color: #121212;
+      color: #e0e0e0;
+      font-family: Arial, sans-serif;
+      padding: 20px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 100vh;
+    }
+
+    /* Container Styles */
+    .container {
+      max-width: 600px;
+      width: 100%;
+      background-color: #1f1f1f;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6);
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+      color: #5ce0a1;
+      font-weight: bold;
+    }
+
+    /* Payment Options */
+    .payment-option {
+      margin-bottom: 20px;
+    }
+
+    .payment-option h3 {
+      margin-bottom: 10px;
+      color: #5ce0a1;
+      font-size: 1.2rem;
+    }
+
+    .form-group {
+      margin-bottom: 15px;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 5px;
+      color: #b0b0b0;
+      font-size: 0.9rem;
+    }
+
+    .form-group input, 
+    .form-group select {
+      width: 100%;
+      padding: 10px;
+      background-color: #2c2c2c;
+      border: 1px solid #555;
+      color: #e0e0e0;
+      border-radius: 5px;
+      font-size: 1rem;
+    }
+
+    .form-group input[type="radio"] {
+      width: auto;
+      margin-right: 10px;
+    }
+
+    .form-group .radio-label {
+      display: inline-block;
+      font-size: 1rem;
+      color: #e0e0e0;
+    }
+
+    .form-group .payment-method {
+      margin-left: 25px;
+    }
+
+    .btn-pay {
+      width: 100%;
+      padding: 15px;
+      background-color: #5ce0a1;
+      color: #121212;
+      border: none;
+      border-radius: 5px;
+      font-size: 1rem;
+      cursor: pointer;
+      font-weight: bold;
+      transition: background-color 0.3s, transform 0.2s;
+    }
+
+    .btn-pay:hover {
+      background-color: #4dc08d;
+      transform: scale(1.02);
+    }
+
+    /* Hidden by Default */
+    .card-details, .online-transaction, .other-options {
+      display: none;
+    }
+
+    /* Show the corresponding payment option */
+    input[type="radio"]:checked + .radio-label + .payment-method {
+      display: block;
+    }
+
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      body {
+        padding: 10px;
+      }
+
+      .container {
+        padding: 15px;
+      }
+
+      h2 {
+        font-size: 1.5rem;
+      }
+
+      .btn-pay {
+        font-size: 0.9rem;
+        padding: 12px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>Proceed to Payment</h2>
+    <form id="paymentForm">
+      <!-- Payment Options -->
+      <div class="payment-option">
+        <h3>Select Payment Method</h3>
+
+        <div class="form-group">
+          <input type="radio" id="cardPayment" name="paymentMethod" value="card">
+          <label for="cardPayment" class="radio-label">Credit/Debit Card</label>
+          <div class="payment-method card-details">
+            <div class="form-group">
+              <label for="cardNumber">Card Number</label>
+              <input type="text" id="cardNumber" name="cardNumber" placeholder="1234 5678 9101 1121" maxlength="19">
+            </div>
+            <div class="form-group">
+              <label for="cardHolderName">Card Holder Name</label>
+              <input type="text" id="cardHolderName" name="cardHolderName" placeholder="John Doe">
+            </div>
+            <div class="form-group">
+              <label for="expiryDate">Expiry Date</label>
+              <input type="text" id="expiryDate" name="expiryDate" placeholder="MM/YY" maxlength="5">
+            </div>
+            <div class="form-group">
+              <label for="cvv">CVV</label>
+              <input type="password" id="cvv" name="cvv" placeholder="123" maxlength="3">
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <input type="radio" id="onlineTransaction" name="paymentMethod" value="onlineTransaction">
+          <label for="onlineTransaction" class="radio-label">Online Transaction (UPI)</label>
+          <div class="payment-method online-transaction">
+            <div class="form-group">
+              <label for="upiId">UPI ID</label>
+              <input type="text" id="upiId" name="upiId" placeholder="example@upi">
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <button type="submit" class="btn-pay">Pay Now</button>
+    </form>
+  </div>
+</body>
+</html>

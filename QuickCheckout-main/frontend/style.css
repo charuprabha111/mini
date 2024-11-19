@@ -1,0 +1,122 @@
+/* style.css */
+
+/* Basic Reset */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, sans-serif;
+  background-color: #0f2b35;
+  color: #e0e0e0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  margin: 0;
+}
+
+.main {
+  text-align: center;
+  max-width: 600px;
+  padding: 20px;
+  border-radius: 12px;
+  background-color: #122f3b;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+  animation: fadeIn 1s ease-in-out;
+}
+
+.hero {
+  position: relative;
+}
+
+.heroimg img {
+  width: 100%;
+  max-width: 400px;
+  border-radius: 8px;
+  animation: slideIn 1s ease-in-out;
+}
+
+.herocontent .para1 {
+  font-size: 1.8em;
+  margin-top: 20px;
+  color: #5ce0a1; /* Soft green color matching the theme */
+  font-weight: bold;
+  letter-spacing: 2px;
+  animation: textFadeIn 1.5s ease-in-out;
+}
+
+.herocontent .para2 {
+  font-size: 1.2em;
+  margin-top: 10px;
+  color: #cfd8dc;
+  line-height: 1.6;
+  animation: textFadeIn 1.8s ease-in-out;
+}
+
+#getbtn {
+  margin-top: 20px;
+  padding: 12px 24px;
+  font-size: 1.1em;
+  color: #ffffff;
+  background-color: #5ce0a1; /* Soft green */
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.3s, transform 0.3s;
+  animation: buttonFadeIn 2s ease-in-out;
+}
+
+#getbtn:hover {
+  background-color: #4dc08d;
+  transform: scale(1.05);
+}
+
+#getbtn:active {
+  transform: scale(1);
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    transform: translateY(-20px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+@keyframes textFadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes buttonFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

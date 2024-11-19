@@ -1,0 +1,75 @@
+.heroImg{
+    margin: 20px 10px;
+    height: 120px;
+    width: 220px;
+}
+
+#video {
+    width: 100%;
+    max-width: 600px;
+}
+
+.heading{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+#btn01{
+    margin: 10px;
+    padding: 10px;
+    height: max-content;
+}
+.totalParent{
+    display: flex;
+    gap: 10px;
+}
+input{
+    height: 30px;
+    font-size: 16px;
+}
+button{
+    height: 30px;
+    width: 100px;
+    background-color: #000000;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+}
+.totalParent{
+    display: flex;
+    justify-content: center;
+    font-weight: bold;
+    margin: 10px;
+}
+.inputsection{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 7px;
+    margin: 20px;
+}
+#barcodeInput {
+    border: 1px solid black;
+}
+.headers {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    font-weight: bolder;
+}
+.item {
+    display: flex;
+    text-align: center;
+}
+.srdiv{
+    width: 20%;
+}
+.namediv{
+    width: 60%;
+}
+.pricediv{
+    width: 20%;
+}

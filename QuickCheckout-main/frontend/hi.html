@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order History</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      background-color: #1b1b1b; /* Dark background */
+      color: #9acd32; /* Light green text */
+      font-family: Arial, sans-serif;
+      padding: 20px;
+    }
+    h1, h2 {
+      color: #98fb98; /* Bright green headers */
+    }
+    .user-orders {
+      border: 1px solid #9acd32;
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      background-color: #222; /* Slightly lighter background for contrast */
+    }
+    .order-items div {
+      margin-left: 10px;
+    }
+    canvas {
+      margin-top: 20px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Order History</h1>
+  <div id="orderHistory"></div>
+  <h2>Sales Overview</h2>
+  <canvas id="salesChart" width="400" height="200"></canvas>
+
+  <script type="module">
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-app.js";
+    import { getFirestore, collection, getDocs, query, orderBy } from "https://www.gstatic.com/firebasejs/10.6.0/firebase-firestore.js";
+
+    const firebaseConfig = {
+      apiKey: "AIzaSyALf0kWiEBWKBUHOCWOLwwbshc8678CQ_M",
+      authDomain: "sass-66c7f.firebaseapp.com",
+      projectId: "sass-66c7f",
+      storageBucket: "sass-66c7f.appspot.com",
+      messagingSenderId: "485007199733",
+      appId: "1:485007199733:web:dbf3c7c8a05f6ab03324bc",
+      measurementId: "G-HS4N83RJ1P"
+    };
+
+    const app = initializeApp(firebaseConfig);
+    const db = getFirestore(app);
+
+    async function fetchGroupedOrderHistory() {
+      const orderHistoryDiv = document.getElementById("orderHistory");
+      const receiptsRef = collection(db, "receipts");
+      const q = query(receiptsRef, orderBy("date", "desc"));
+
+      const groupedOrders = {};
+      const salesData = {}; // Data for the graph
+
+      try {
+        const querySnapshot = await getDocs(q);
+        if (querySnapshot.empty) {
+          orderHistoryDiv.innerHTML = "<p>No orders found.</p>";
+          return;
+        }
+
+        querySnapshot.forEach(doc => {
+          const { username, items, total, date } = doc.data();
+          const formattedDate = new Date(date).toLocaleDateString();
+
+          // Group orders by username
+          if (!groupedOrders[username]) groupedOrders[username] = { orders: [], total: 0 };
+          groupedOrders[username].orders.push({ items, total, date: formattedDate });
+          groupedOrders[username].total += total;
+
+          // Aggregate sales by date
+          salesData[formattedDate] = (salesData[formattedDate] || 0) + total;
+        });
+
+        // Render grouped orders
+        for (const [username, data] of Object.entries(groupedOrders)) {
+          const userDiv = document.createElement("div");
+          userDiv.classList.add("user-orders");
+          userDiv.innerHTML = `
+            <h2>User: ${username}</h2>
+            <p><strong>Total Spent:</strong> ₹${data.total.toFixed(2)}</p>
+            <div class="order-items">
+              <strong>Order Details:</strong>
+            </div>
+          `;
+
+          const itemsDiv = userDiv.querySelector(".order-items");
+          data.orders.forEach(order => {
+            const orderDetails = document.createElement("div");
+            orderDetails.innerHTML = `
+              <p>Date: ${order.date}</p>
+              ${order.items.map(item => `<div>${item.name} (Qty: ${item.quantity}, ₹${(item.price * item.quantity).toFixed(2)})</div>`).join("")}
+            `;
+            itemsDiv.appendChild(orderDetails);
+          });
+
+          orderHistoryDiv.appendChild(userDiv);
+        }
+
+        // Render sales graph
+        renderSalesGraph(salesData);
+      } catch (err) {
+        console.error("Error fetching order history:", err);
+        orderHistoryDiv.innerHTML = "<p>Error loading order history. Please try again later.</p>";
+      }
+    }
+
+    function renderSalesGraph(salesData) {
+      const ctx = document.getElementById('salesChart').getContext('2d');
+      const labels = Object.keys(salesData).sort();
+      const data = labels.map(label => salesData[label]);
+
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: labels,
+          datasets: [{
+            label: 'Sales (₹)',
+            data: data,
+            backgroundColor: 'rgba(50, 205, 50, 0.2)', // Light green for the area
+            borderColor: '#32cd32', // Bright green for the line
+            borderWidth: 2,
+            pointBackgroundColor: '#98fb98', // Bright green points
+          }]
+        },
+        options: {
+          responsive: true,
+          plugins: {
+            legend: {
+              labels: {
+                color: '#9acd32' // Green labels
+              }
+            }
+          },
+          scales: {
+            x: {
+              ticks: {
+                color: '#9acd32' // Green tick labels
+              }
+            },
+            y: {
+              ticks: {
+                color: '#9acd32' // Green tick labels
+              },
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    }
+
+    // Call the function on page load
+    fetchGroupedOrderHistory();
+  </script>
+</body>
+</html>

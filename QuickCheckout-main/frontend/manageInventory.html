@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Inventory</title>
+    <h1>Inventory Management</h1>
+    <style>
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: center;
+        }
+        button {
+            padding: 5px 10px;
+            cursor: pointer;
+            background-color: black;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        button:hover {
+            background-color: #333;
+        }
+        input[type="number"] {
+            width: 60px;
+            padding: 3px;
+        }
+    </style>
+</head>
+<body>
+    <table>
+        <thead>
+            <tr>
+                <th>Barcode</th>
+                <th>Item Name</th>
+                <th>Original Price</th>
+                <th>Discount (%)</th>
+                <th>Updated Price</th>
+                <th>Quantity</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody id="inventoryTable">
+            <!-- Item rows will be dynamically added here -->
+        </tbody>
+    </table>
+    <script type="module" src="iventory.js"></script>
+</body>
+</html>

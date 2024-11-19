@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Item</title>
+    <style>
+        /* General Reset */
+        *,
+        *::before,
+        *::after {
+            margin: 0;
+            padding: 0;
+            font-weight: 500;
+            box-sizing: border-box;
+        }
+
+        /* Body Styles */
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #0f2b35; /* Dark background */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            color: #e0e0e0; /* Light text color */
+        }
+
+        /* Container Styling */
+        .container {
+            backdrop-filter: blur(8px);
+            padding: 2rem 1.5rem;
+            border-radius: 1rem;
+            border: 2px solid #5ce0a1; /* Soft green border */
+            width: 400px; /* Fixed width for better structure */
+            background-color: rgba(18, 47, 59, 0.9); /* Semi-transparent dark background */
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.6); /* Shadow for depth */
+            display: flex;
+            flex-direction: column;
+            align-items: center; /* Align all content to center */
+        }
+
+        /* Heading Styles */
+        .heading {
+            color: #5ce0a1; /* Soft green */
+            font-weight: 700;
+            text-align: center;
+            width: 100%;
+            margin-bottom: 20px; /* Space below heading */
+        }
+
+        /* Input Box Styling */
+        .inputbox {
+            width: 100%; /* Ensure full-width for all input boxes */
+            margin-bottom: 20px;
+        }
+
+        .inputbox label {
+            display: block;
+            font-size: 0.9rem;
+            margin-bottom: 5px; /* Space between label and input */
+        }
+
+        .inputbox input {
+            width: 100%;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 1rem;
+            border: 1px solid #5ce0a1; /* Soft green border */
+            background-color: #122f3b; /* Dark input background */
+            color: #e0e0e0; /* Light text color */
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .inputbox input:focus {
+            border-color: #4dc08d; /* Darker green on focus */
+        }
+
+        /* Button Styles */
+        .submit-button {
+            padding: 10px 20px;
+            font-weight: 700;
+            border: none;
+            border-radius: 10px;
+            background-color: #5ce0a1; /* Soft green */
+            color: #0f2b35; /* Dark text color for contrast */
+            cursor: pointer;
+            font-size: 1rem;
+            width: 100%; /* Full width for better alignment */
+            transition: background-color 0.3s, transform 0.3s;
+        }
+
+        .submit-button:hover {
+            background-color: #4dc08d; /* Darker green on hover */
+            transform: scale(1.05);
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+    <script type="module" src="newItem.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <h1 class="heading">Add New Item</h1>
+        <div class="inputbox">
+            <label for="code">Enter barcode of item:</label>
+            <input type="text" id="code" placeholder="Enter barcode">
+        </div>
+        <div class="inputbox">
+            <label for="name">Enter item name:</label>
+            <input type="text" id="name" placeholder="Enter name">
+        </div>
+        <div class="inputbox">
+            <label for="price">Enter the price of item:</label>
+            <input type="text" id="price" placeholder="Enter price">
+        </div>
+        <div class="inputbox">
+            <button class="submit-button" id="btn11">Submit</button>
+        </div>
+    </div>
+</body>
+</html>

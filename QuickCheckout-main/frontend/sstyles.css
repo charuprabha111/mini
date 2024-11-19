@@ -1,0 +1,97 @@
+/* General page styling */
+body {
+    background-color: #1c1c1c; /* Dark background */
+    color: #e0e0e0; /* Light text color */
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+/* Order summary container */
+.order-summary {
+    background-color: #2a2a2a; /* Darker background for the summary container */
+    border-radius: 8px;
+    padding: 20px;
+    max-width: 600px;
+    width: 100%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Subtle shadow for depth */
+}
+
+.order-summary h1 {
+    color: #4dc08d; /* Green accent color for heading */
+    font-size: 1.8em;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Order list section */
+.order-list {
+    background-color: #333333; /* Darker background for the list items */
+    padding: 15px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    max-height: 400px;
+    overflow-y: auto; /* Scrollable if order list is too long */
+}
+
+/* Each order item */
+.order-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #4dc08d; /* Green divider */
+    color: #e0e0e0;
+}
+
+.order-item:last-child {
+    border-bottom: none; /* Remove divider from the last item */
+}
+
+/* Order total section */
+.order-total {
+    font-size: 1.4em;
+    text-align: center;
+    margin-bottom: 20px;
+    color: #e0e0e0;
+}
+
+/* Back button styling */
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4dc08d; /* Green button background */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1em;
+    cursor: pointer;
+    font-weight: bold;
+    text-align: center;
+}
+
+button:hover {
+    background-color: #3fa078; /* Slightly darker green on hover */
+}
+
+/* Responsive adjustments */
+@media (max-width: 600px) {
+    .order-summary {
+        padding: 15px;
+    }
+
+    .order-summary h1 {
+        font-size: 1.6em;
+    }
+
+    .order-total {
+        font-size: 1.2em;
+    }
+
+    button {
+        font-size: 0.9em;
+    }
+}

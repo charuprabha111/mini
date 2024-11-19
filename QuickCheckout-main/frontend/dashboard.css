@@ -1,0 +1,240 @@
+/* General Styles */
+body {
+    background-color: #1c1c1c; /* Dark background for the body */
+    color: #e0e0e0; /* Light text color for contrast */
+  }
+  
+  .heroImg {
+    margin: 20px 10px;
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  #video {
+    width: 100%;
+    max-width: 600px;
+  }
+  
+  .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  #btn01 {
+    margin: 10px;
+    padding: 10px;
+    height: max-content;
+    background-color: #4dc08d;
+    color: #ffffff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .totalParent {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    font-weight: bold;
+    margin: 10px;
+    font-size: 1.2em;
+    color: #e0e0e0;
+  }
+  
+  input {
+    height: 30px;
+    font-size: 16px;
+    background-color: #333333;
+    color: #e0e0e0;
+    border: 1px solid #4dc08d;
+  }
+  
+  button {
+    height: 28px;
+    width: 80px;
+    background-color: #4dc08d;
+    border: none;
+    border-radius: 5px;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    font-size: 14px;
+  }
+  
+  .inputsection {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin: 20px;
+  }
+  
+  #barcodeInput {
+    border: 1px solid #4dc08d;
+    padding: 5px;
+    flex: 1;
+    max-width: 300px;
+    background-color: #333333;
+    color: #e0e0e0;
+  }
+  
+  .headers {
+    display: flex;
+    justify-content: space-evenly;
+    text-align: center;
+    font-weight: bolder;
+    color: #e0e0e0;
+  }
+  
+  /* Style for each item in the cart */
+  .item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px;
+    background-color: #2a2a2a;
+    border-radius: 8px;
+    margin: 8px 0;
+    color: #e0e0e0;
+    width: 100%;
+    box-sizing: border-box;
+  }
+  
+  .item-details {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    padding-right: 20px;
+  }
+  
+  .item-name {
+    font-size: 1.2em;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+  
+  .divider {
+    margin: 5px 0;
+    border: none;
+    border-top: 1px solid #ccc;
+  }
+  
+  .quantity-and-delete {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .quantitydiv {
+    display: flex;
+    align-items: center;
+    gap: 5px; /* Reduced gap between quantity controls */
+  }
+  
+  .quantityBtn {
+    font-size: 14px; /* Reduced font size */
+    padding: 3px 6px; /* Reduced padding */
+    background-color: #4dc08d;
+    border: 1px solid #4dc08d;
+    cursor: pointer;
+    border-radius: 4px; /* Slight rounding for buttons */
+  }
+  
+  .quantityInput {
+    width: 30px; /* Increased width to fit input text */
+    text-align: center;
+    font-size: 16px;
+  }
+  
+  .deleteBtn {
+    padding: 5px 10px;
+    background-color: #4dc08d;
+    color: white;
+    border: none;
+    cursor: pointer;
+    margin-left: 10px;
+  }
+  
+  /* Price section aligned to the right */
+  .item-price {
+    display: flex;
+    justify-content: flex-end;
+    flex: 1;
+  }
+  
+  .pricediv {
+    font-size: 1.2em;
+    font-weight: bold;
+    text-align: right;
+  }
+  
+  /* Mobile view adjustments */
+  @media screen and (max-width: 600px) {
+    .item {
+      flex-direction: column; /* Stack items vertically */
+      align-items: flex-start;
+    }
+  
+    .item-details {
+      padding-right: 0;
+      margin-bottom: 10px;
+    }
+  
+    .quantity-and-delete {
+      flex-direction: column; /* Stack buttons vertically on mobile */
+      align-items: flex-start;
+    }
+  
+    .deleteBtn {
+      margin-top: 10px; /* Add some space above the delete button on mobile */
+    }
+  
+    .item-price {
+      margin-top: 10px; /* Add some space below the price on mobile */
+    }
+    .modal {
+      display: none; /* Hidden by default */
+      position: fixed; /* Stay in place */
+      z-index: 1000; /* Sit on top */
+      left: 0;
+      top: 0;
+      width: 100%; /* Full width */
+      height: 100%; /* Full height */
+      overflow: auto; /* Enable scroll if needed */
+      background-color: rgba(0, 0, 0, 0.5); /* Black background with transparency */
+    }
+    
+    /* Modal content */
+    .modal-content {
+      position: relative;
+      background-color: #131212;
+      margin: 10% auto; /* Center it vertically */
+      padding: 20px;
+      border: 1px solid #888;
+      width: 80%; /* Width of the modal */
+      border-radius: 10px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+    
+    /* Close button */
+    .close {
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      color: #aaa;
+      font-size: 28px;
+      font-weight: bold;
+      cursor: pointer;
+    }
+    
+    .close:hover,
+    .close:focus {
+      color: #000;
+      text-decoration: none;
+      cursor: pointer;
+    }
+  }
+  
