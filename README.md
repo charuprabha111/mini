@@ -92,27 +92,6 @@ The application improves checkout efficiency, reduces manual billing effort, and
 - Advanced admin analytics dashboard
 
 ---
-## 📸 Screenshots
-
-### Welcome & Role Selection
-![Welcome Screen](Pictures/welcome.png)
-![Admin or User Selection](Pictures/admin_or_user.png)
-
-### Authentication
-![Login](Pictures/login.png)
-![Register](Pictures/register.png)
-
-### Admin Panel
-![Admin Dashboard](Pictures/admin_dashboard.png)
-![Add New Products](Pictures/add_new_products.png)
-![Inventory Management](Pictures/inventory_management.png)
-![Sales Analytics](Pictures/analytics.png)
-
-### User Flow
-![User Dashboard](Pictures/user_dashboard.png)
-![Order Confirmation](Pictures/order_conformation.png)
-![Order History](Pictures/order_history.png)
-
 
 ## 👩‍💻 Developer
 
